@@ -8,12 +8,18 @@ const cloudinary = require("cloudinary");
 
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const myCloud = await cloudinary.v2.uploader.upload(req.files.avatar.tempFilePath, {
-    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatars",
-    width: 150,
-    crop: "scale",
-  });
+
+// remove avatar if not exist in request
+
+ if(req?.body?.avatar){
+   // const myCloud = await cloudinary.v2.uploader.upload(req.files.avatar.tempFilePath, {
+     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+     folder: "avatars",
+     width: 150,
+     crop: "scale",
+   });
+ }
+
 
   const { name, email, password } = req.body;
 
