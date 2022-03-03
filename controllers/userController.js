@@ -11,8 +11,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
   // remove avatar if not exist in request
   let myCloud = {
-    public_id : '',
-    secure_url : ''
+    public_id : 'nouser',
+    secure_url : 'nouser'
   }
   if (req?.body?.avatar) {
     // const myCloud = await cloudinary.v2.uploader.upload(req.files.avatar.tempFilePath, {
