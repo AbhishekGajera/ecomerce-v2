@@ -9,16 +9,19 @@ const cloudinary = require("cloudinary");
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
-// remove avatar if not exist in request
-
- if(req?.body?.avatar){
-   // const myCloud = await cloudinary.v2.uploader.upload(req.files.avatar.tempFilePath, {
-     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-     folder: "avatars",
-     width: 150,
-     crop: "scale",
-   });
- }
+  // remove avatar if not exist in request
+  let myCloud = {
+    public_id : '',
+    secure_url : ''
+  }
+  if (req?.body?.avatar) {
+    // const myCloud = await cloudinary.v2.uploader.upload(req.files.avatar.tempFilePath, {
+    cloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+  }
 
 
   const { name, email, password } = req.body;
@@ -89,7 +92,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   let resetPasswordUrl = ''
 
-  if(req.body.mailURL){
+  if (req.body.mailURL) {
     resetPasswordUrl = `${req.protocol}://${req.body.mailURL}/password/reset/${resetToken}`;
   }
   else {
