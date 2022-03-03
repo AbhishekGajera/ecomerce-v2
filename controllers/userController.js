@@ -16,7 +16,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   }
   if (req?.body?.avatar) {
     // const myCloud = await cloudinary.v2.uploader.upload(req.files.avatar.tempFilePath, {
-    cloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "avatars",
       width: 150,
       crop: "scale",
